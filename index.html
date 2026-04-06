@@ -14,6 +14,7 @@
         padding: 24px 36px;
         background: #f4f5f8;
         color: #222;
+        overflow-x: hidden;
       }
       h1 {
         font-size: 1.5rem;
@@ -544,6 +545,7 @@
       function mkTimeline(data) {
         return S({
           data: { values: data },
+          autosize: { type: "fit-x", contains: "padding" },
           title: {
             text: "Order Timeline — Individual Orders over Time",
             subtitle:
@@ -579,14 +581,13 @@
                     type: "point",
                     filled: true,
                     opacity: 0.85,
-                    clip: false,
                   },
                   encoding: {
                     x: {
                       field: "OrderDate",
                       type: "temporal",
                       axis: { title: null, format: "%b %Y", labelAngle: -30 },
-                      scale: { padding: 20 },
+                      scale: { padding: 30 },
                     },
                     y: {
                       field: "Total",
@@ -701,6 +702,7 @@
       function mkHeatmap(data) {
         return S({
           data: { values: data },
+          autosize: { type: "fit-x", contains: "padding" },
           title: {
             text: "Revenue Heatmap — Region × Item",
             subtitle:
@@ -795,6 +797,7 @@
                   field: "OrderDate",
                   type: "temporal",
                   timeUnit: "yearmonth",
+                  scale: { padding: 30 },
                   axis: {
                     title: null,
                     format: "%b %Y",
@@ -1655,7 +1658,7 @@
       (async () => {
         let rows;
         try {
-          const resp = await fetch("/"+DATA_FILE);
+          const resp = await fetch(DATA_FILE);
           if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
           const text = await resp.text();
 
