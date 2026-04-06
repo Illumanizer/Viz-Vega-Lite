@@ -850,29 +850,36 @@
           },
         };
 
+        // donut must be a direct vconcat child — arc marks don't render inside hconcat in VL5
         const donut = {
           title: {
-            text: "(2) Revenue by Rep",
+            text: "(2b) Revenue by Rep — Donut",
             subtitle: "Updates for selected region",
             anchor: "start",
           },
           data: dv,
-          width: 240,
-          height: 220,
+          width: 320,
+          height: 260,
           transform: [{ filter: { param: "rgSel" } }],
-          mark: { type: "bar", color: "#4C78A8", cornerRadiusTopRight: 3, cornerRadiusBottomRight: 3 },
+          mark: {
+            type: "arc",
+            innerRadius: 60,
+            outerRadius: 115,
+            padAngle: 0.012,
+            cornerRadius: 3,
+          },
           encoding: {
-            y: {
-              field: "Rep",
-              type: "nominal",
-              sort: { field: "Total", op: "sum", order: "descending" },
-              axis: { title: null, labelFontSize: 10 },
-            },
-            x: {
+            theta: {
               field: "Total",
               type: "quantitative",
               aggregate: "sum",
-              axis: { title: "Revenue ($)", format: "$.0f", labelFontSize: 9 },
+              stack: true,
+            },
+            color: {
+              field: "Rep",
+              type: "nominal",
+              scale: { scheme: "tableau10" },
+              legend: { orient: "right", title: "Rep", labelFontSize: 9 },
             },
             tooltip: [
               { field: "Rep", type: "nominal" },
@@ -1347,7 +1354,8 @@
           },
           spacing: 22,
           vconcat: [
-            { hconcat: [regionBar, donut, stream], spacing: 20 },
+            { hconcat: [regionBar, stream], spacing: 20 },
+            donut,
             trellis,
             { hconcat: [timeline, heatmapMV], spacing: 20 },
             { hconcat: [cumulativeMV, scatterMV, boxplotMV], spacing: 20 },
