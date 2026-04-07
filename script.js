@@ -853,7 +853,7 @@
         // donut must be a direct vconcat child — arc marks don't render inside hconcat in VL5
         const donut = {
           title: {
-            text: "(2b) Revenue by Rep — Donut",
+            text: "(2) Revenue by Rep — Donut",
             subtitle: "Updates for selected region",
             anchor: "start",
           },

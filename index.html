@@ -3,149 +3,144 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Assignment 3 - HW_III Sales</title>
+    <title>Assignment 3 - HW_III Sales Analysis</title>
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1>HW_III &nbsp;<span>Sales Analysis</span></h1>
-    <p class="info">
-      <!-- ELL7285 &nbsp;·&nbsp; Data Visualization &nbsp;·&nbsp; Assignment 3 &nbsp;·&nbsp;-->
-       Office supply orders Jan 2021–Dec 2022
-    </p>
-    <div class="stats">
-      <div class="stat">
-        <div class="val" id="s-rev">—</div>
-        <div class="lbl">Revenue</div>
-      </div>
-      <div class="stat">
-        <div class="val" id="s-ord">—</div>
-        <div class="lbl">Orders</div>
-      </div>
-      <div class="stat">
-        <div class="val" id="s-rep">—</div>
-        <div class="lbl">Reps</div>
-      </div>
-      <div class="stat">
-        <div class="val" id="s-item">—</div>
-        <div class="lbl">Items</div>
-      </div>
-      <div class="stat">
-        <div class="val" id="s-rgn">—</div>
-        <div class="lbl">Regions</div>
-      </div>
-    </div>
 
-    <div id="fallback">
-      <p>
-        <strong>Could not load HW_III.csv.</strong> Open a terminal in this
-        folder and run: <code>python3 -m http.server 8000</code>, then visit
-        <code>http://localhost:8000</code>.
-      </p>
-    </div>
+    <header class="site-header">
+      <div>
+        <h1>HW_III &nbsp;<span>Sales Analysis</span></h1>
+        <p class="subtitle">Office supply orders &nbsp;·&nbsp; Jan 2021 – Dec 2022</p>
+      </div>
+      <div class="header-badge">ELL7285 &nbsp;·&nbsp; Data Visualization &nbsp;·&nbsp; IIT Delhi</div>
+    </header>
 
-    <div id="charts" style="display: none">
-      <h2>Part A — Required Charts</h2>
+    <div class="page-body">
 
-      <div class="row">
-        <div class="box">
-          <h3>1. Donut — Revenue by Rep</h3>
-          <p>Hover a slice to see revenue and share of total</p>
-          <div id="v1"></div>
-        </div>
-        <div class="box wide">
-          <h3>2. Streamgraph — Revenue over Time by Item</h3>
-          <p>Click an item in the legend to highlight its stream</p>
-          <div id="v2"></div>
-        </div>
+      <div class="stats">
+        <div class="stat"><div class="val" id="s-rev">—</div><div class="lbl">Revenue</div></div>
+        <div class="stat"><div class="val" id="s-ord">—</div><div class="lbl">Orders</div></div>
+        <div class="stat"><div class="val" id="s-rep">—</div><div class="lbl">Reps</div></div>
+        <div class="stat"><div class="val" id="s-item">—</div><div class="lbl">Items</div></div>
+        <div class="stat"><div class="val" id="s-rgn">—</div><div class="lbl">Regions</div></div>
       </div>
 
-      <div class="row">
-        <div class="box">
-          <h3>3. Trellis Histogram — Units by Item</h3>
-          <p>
-            Dashed red line shows mean units per item; hover bars for counts
-          </p>
-          <div id="v3"></div>
-        </div>
-      </div>
-
-      <h2>Part B — Interactive Charts</h2>
-
-      <div class="row">
-        <div class="box">
-          <h3>4. Order Timeline</h3>
-          <p>
-            Drag to brush a time window — bar chart below updates. Slider
-            filters min order value. Red dashed line = trend.
-          </p>
-          <div id="v4"></div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="box">
-          <h3>5. Revenue Heatmap — Region × Item</h3>
-          <p>
-            Click a cell to select that item; monthly trend line updates below.
-            Double-click to reset.
-          </p>
-          <div id="v5"></div>
-        </div>
-      </div>
-
-      <h2>Part D — Additional Visualizations</h2>
-
-      <div class="row">
-        <div class="box">
-          <h3>6. Cumulative Revenue by Item</h3>
-          <p>
-            Running total per item over time. Use the Year dropdown to zoom into
-            a single year.
-          </p>
-          <div id="v6"></div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="box wide">
-          <h3>7. Scatter Matrix — Units, Unit Cost, Revenue</h3>
-          <p>
-            All pairwise scatter plots. Drag to brush any panel and matching
-            points highlight across all panels.
-          </p>
-          <div id="v7"></div>
-        </div>
-        <div class="box">
-          <h3>8. Boxplot — Units Distribution by Item</h3>
-          <p>
-            Shows median, IQR and outliers. Use the Region dropdown to filter.
-          </p>
-          <div id="v8"></div>
-        </div>
-      </div>
-
-      <h2>Part C — Multiview (all 8 charts concatenated)</h2>
-
-      <div class="mv-note">
-        <strong>Cross-filter by Region:</strong> click any Region bar on the
-        left to filter all charts simultaneously. Double-click to reset.
-      </div>
-
-      <div class="box" style="overflow-x: auto">
-        <h3>All 8 Charts — Single Vega-Lite Spec</h3>
+      <div id="fallback">
         <p>
-          vconcat / hconcat / facet — region selection shared across all views
+          <strong>Could not load HW_III.csv.</strong> Open a terminal in this
+          folder and run: <code>python3 -m http.server 8000</code>, then visit
+          <code>http://localhost:8000</code>.
         </p>
-        <div id="vMV"></div>
       </div>
-    </div>
+
+      <div id="charts" style="display: none">
+
+        <div class="section-heading">
+          <span class="badge">Part A</span>
+          <h2>Required Charts</h2>
+        </div>
+
+        <div class="row">
+          <div class="box">
+            <span class="chart-label">Chart 1</span>
+            <h3>Donut — Revenue by Rep</h3>
+            <p>Hover a slice to see revenue and share of total</p>
+            <div id="v1"></div>
+          </div>
+          <div class="box wide">
+            <span class="chart-label">Chart 2</span>
+            <h3>Streamgraph — Revenue over Time by Item</h3>
+            <p>Click an item in the legend to highlight its stream</p>
+            <div id="v2"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="box">
+            <span class="chart-label">Chart 3</span>
+            <h3>Trellis Histogram — Units by Item</h3>
+            <p>Dashed red line shows mean units per item · hover bars for counts</p>
+            <div id="v3"></div>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <span class="badge green">Part B</span>
+          <h2>Interactive Charts</h2>
+        </div>
+
+        <div class="row">
+          <div class="box">
+            <span class="chart-label">Chart 4</span>
+            <h3>Order Timeline</h3>
+            <p>Drag to brush a time window — bar chart below updates · slider filters min order value · red dashed line = trend</p>
+            <div id="v4"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="box">
+            <span class="chart-label">Chart 5</span>
+            <h3>Revenue Heatmap — Region × Item</h3>
+            <p>Click a cell to select that item · monthly trend line updates below · double-click to reset</p>
+            <div id="v5"></div>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <span class="badge purple">Part D</span>
+          <h2>Additional Visualizations</h2>
+        </div>
+
+        <div class="row">
+          <div class="box">
+            <span class="chart-label">Chart 6</span>
+            <h3>Cumulative Revenue by Item</h3>
+            <p>Running total per item over time · use the Year dropdown to zoom into a single year</p>
+            <div id="v6"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="box wide">
+            <span class="chart-label">Chart 7</span>
+            <h3>Scatter Matrix — Units, Unit Cost, Revenue</h3>
+            <p>All pairwise scatter plots · drag to brush any panel and matching points highlight across all panels</p>
+            <div id="v7"></div>
+          </div>
+          <div class="box">
+            <span class="chart-label">Chart 8</span>
+            <h3>Boxplot — Units Distribution by Item</h3>
+            <p>Shows median, IQR and outliers · use the Region dropdown to filter</p>
+            <div id="v8"></div>
+          </div>
+        </div>
+
+        <div class="section-heading">
+          <span class="badge">Part C</span>
+          <h2>Multiview — All 8 Charts Concatenated</h2>
+        </div>
+
+        <div class="mv-note">
+          <strong>Cross-filter by Region:</strong> click any Region bar on the left to filter all charts simultaneously · double-click to reset
+        </div>
+
+        <div class="box" style="overflow-x: auto">
+          <h3>All 8 Charts — Single Vega-Lite Spec</h3>
+          <p>vconcat / hconcat / facet · region selection shared across all views</p>
+          <div id="vMV"></div>
+        </div>
+
+      </div><!-- #charts -->
+
+    </div><!-- .page-body -->
 
     <footer>
-      HW_III &nbsp;·&nbsp; ELL7285 Data Visualization &nbsp;·&nbsp; IIT Delhi
-      &nbsp;·&nbsp; 2026
+      HW_III &nbsp;·&nbsp; ELL7285 Data Visualization &nbsp;·&nbsp; IIT Delhi &nbsp;·&nbsp; 2026
     </footer>
 
     <script src="script.js"></script>
